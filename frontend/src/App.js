@@ -13,7 +13,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-
+import { LoadingOutlined, SmileOutlined, SolutionOutlined } from '@ant-design/icons';
+import { Steps } from 'antd';
 
 const { Countdown } = Statistic;
 const deadline = Date.now() + 1000 * 60 * 60 * 24 * 2 + 1000 * 30; // Dayjs is also OK
@@ -105,8 +106,9 @@ function App() {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <items>User</items>
+            <items>Bill</items>
+            
           </Breadcrumb>
           <div
             style={{
@@ -122,6 +124,30 @@ function App() {
       <button onClick={() => setCounter(counter - 1)}>-</button>
       <h3>{counter}</h3>
       <DatePicker />
+      <Steps
+    items={[
+      {
+        title: 'Login',
+        status: 'finish',
+        icon: <UserOutlined />,
+      },
+      {
+        title: 'Verification',
+        status: 'finish',
+        icon: <SolutionOutlined />,
+      },
+      {
+        title: 'Pay',
+        status: 'process',
+        icon: <LoadingOutlined />,
+      },
+      {
+        title: 'Done',
+        status: 'wait',
+        icon: <SmileOutlined />,
+      },
+    ]}
+  />
       <FloatButton.Group
       shape="circle"
       style={{
