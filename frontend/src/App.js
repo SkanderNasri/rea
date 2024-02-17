@@ -18,10 +18,23 @@ function App() {
     setUsername(response.data);
   }
 
+  const [counter, setCounter] = useState(0);
+
+  const handleClick1 = () => {
+    setCounter(counter + 1);
+  };
+
+  
+
+
+
   return (
     <>
       <h1>My Website</h1>
       <h3>My Name is {userName}</h3>
+      <button onClick={handleClick1}>+</button>
+      <button onClick={() => setCounter(counter - 1)}>-</button>
+      <h3>{counter}</h3>
     </>
   );
 }
