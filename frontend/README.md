@@ -68,3 +68,57 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+<!-- Node.js App:
+
+- make project folder
+- run npm init -y to initialise backend
+- create app.js to write your api
+- run npm i express to setup a server
+in app.js:
+	
+	// Initialise Express
+
+const express = require('express');
+const app = express();
+
+// Create a simple Route ==> sends Skander whenever someone makes a call
+app.get('/names', (rep, res) => {
+    res.send('Skander');
+});
+
+// Initialising a listening port
+app.listen(5000, () => {
+    console.log("Server is runnig on port 5000");
+});
+
+Add "proxy": "http://localhost:5000" to package.json in the backend
+
+App.js Frontend
+
+import './App.css';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
+
+function App() {
+  const [userName, setUsername] = useState('');
+
+  useEffect(() => {
+    getNames();
+  }, [])
+  // Async call, we should handle the promises  
+  const getNames = async () => {
+    const response = await axios.get('/names');
+    console.log(response);
+    setUsername(response.data);
+  }
+
+  return (
+    <>
+      <h1>My Website</h1>
+      <h3>My Name is Skander</h3>
+    </>
+  );
+}
+
+export default App; -->
