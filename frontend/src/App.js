@@ -1,12 +1,12 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import NoPage from './pages/NoPage';
-import Navbar from './components/Navbar';
+//import {BrowserRouter, Routes, Route} from 'react-router-dom';
+// import Home from './pages/Home';
+// import About from './pages/About';
+// import Contact from './pages/Contact';
+// import NoPage from './pages/NoPage';
+// import Navbar from './components/Navbar';
 // import './App.css';
 // import axios from 'axios';
-// import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 // import {DatePicker} from 'antd';
 // import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons';
 // import { FloatButton } from 'antd';
@@ -57,7 +57,6 @@ import Navbar from './components/Navbar';
 //   }
 // };
 
-
 // function App() {
 //   const [userName, setUsername] = useState('');
 
@@ -65,8 +64,7 @@ import Navbar from './components/Navbar';
 //     getNames();
 //   }, [])
 
-
-//   // Async call, we should handle the promises  
+//   // Async call, we should handle the promises
 //   const getNames = async () => {
 //     const response = await axios.get('/names');
 //     console.log(response);
@@ -99,18 +97,18 @@ import Navbar from './components/Navbar';
 //         <Header
 //           style={{
 //             padding: 0,
-            
+
 //             background: colorBgContainer,
 //           }}
-//         > 
+//         >
 //         <h1 style={{
 //           margin: '5px 0',
 //           marginLeft: '16px',
 //         }}>
-          
+
 //           Hallo, ich bin {userName}
-          
-//         </h1> 
+
+//         </h1>
 //         </Header>
 //         <Content
 //           style={{
@@ -124,7 +122,7 @@ import Navbar from './components/Navbar';
 //           >
 //             <items>User</items>
 //             <items>Bill</items>
-            
+
 //           </Breadcrumb>
 //           <div
 //             style={{
@@ -144,7 +142,7 @@ import Navbar from './components/Navbar';
 //       <FloatButton />
 //       <FloatButton.BackTop visibilityHeight={0} />
 //     </FloatButton.Group>
-    
+
 //           </div>
 //         </Content>
 //         <Footer
@@ -156,32 +154,89 @@ import Navbar from './components/Navbar';
 //         </Footer>
 //       </Layout>
 //     </Layout>
-      
+
 //     </div>
 //   );
 // }
 
 // export default App;
 
-
 // Multiple pages
+// export default function App() {
+//   return (
+
+//     <div>
+
+//       <BrowserRouter>
+//         <Routes>
+//           <Route index element={<Home/>}/>
+//           <Route path="/home" element={<Home/>}/>
+//           <Route path="/contact" element={<Contact/>}/>
+//           <Route path="/about" element={<About/>}/>
+//           <Route path="*" element={<NoPage/>}/>
+
+//         </Routes>
+//       </BrowserRouter>
+//     </div>
+//   )
+// }
+
 export default function App() {
+  const [page, setPage] = useState("index");
+
+  function NavBar() {
+    return (
+      <ul className="list-none flex justify-end gap-2 pr-2">
+        {/* <li>
+          <a href="home">home</a>
+        </li>
+        <li>
+          <a href="about" onClick={() => setPage("about")}>
+            about
+          </a>
+        </li> */}
+        {/* <li onClick={() => setPage("home")}>Home</li>
+        <li onClick={() => setPage("about")}>About</li> */}
+
+        <li onClick={() => setPage("home")}>Home</li>
+        <li onClick={() => setPage("about")}>About</li>
+      </ul>
+    );
+  }
+
+  function Index() {
+    return <div className="home">This is Home.</div>;
+  }
+
+  function About() {
+    return <div className="about">About Nothing.</div>;
+  }
+
+  function NotFound() {
+    return <div className="notfound">404, bub.</div>;
+  }
+
+  // eslint-disable-next-line no-restricted-globals
+  history.replaceState(null, "", page);
+
+  let display = "";
+  switch (page) {
+    case "home":
+      display = <Index />;
+      break;
+    case "about":
+      display = <About />;
+      break;
+    default:
+      display = <NotFound />;
+  }
+
   return (
-    
-    <div>
-      
-      
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/contact" element={<Contact/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="*" element={<NoPage/>}/>
-
-        </Routes>
-      </BrowserRouter>
+    <div className="p-4 h-screen">
+      <NavBar />
+      <div className="flex justify-center items-center h-full text-3xl font-bold">
+        {display}
+      </div>
     </div>
-  )
+  );
 }
-
